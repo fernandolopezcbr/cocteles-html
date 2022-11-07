@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link rel="icon" href="./logo-quetzal.png">
+    
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="estilos.css">
+  
+
+    <style>
+
+body {
+    background-color: #1d5851;
+  }
+        /*SECCICON WRAPPER O CARDS*/
+
+
+
+  .wrapper {
+    width: 95%;
+    margin: 0 auto;
+    
+  }
+  
+  .swiper{
+    padding: 7px;
+    background-color: #fff;
+    height: 110px;
+    margin-top: 2em;
+    box-shadow: 1em 2em 2.5em rgba(1, 2, 68, 0.08);
+    border: solid rgb(236, 232, 232);
+    
+  }
+
+ 
+  #search-container {
+    margin: 2em 0;
+    text-align: center;
+  }
+  #search-container input {
+    background-color: #fff;
+    width: 65%;
+    border-bottom: 2px solid #110f29;
+    padding: 1em 0.3em;
+    border-radius: 3em;
+    text-align: center;
+  }
+  #search-container input:focus {
+    border-bottom-color: #32968a;
+  }
+  #search-container button {
+    padding: 1em 2em;
+    margin-left: 1em;
+    background-color: #32968a;
+    color: #ffffff;
+    border-radius: 15px;
+    margin-top: 1em;
+  }
+  #search-container button:hover {
+    padding: 1em 2em;
+    margin-left: 1em;
+    background-color: black;
+    color: #ffffff;
+    border-radius: 5px;
+    margin-top: 1em;
+  }
+
+
+
+  #products {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 1.5em;
+    padding: 2em 0;
+  }
+
+  /*COLOR DE FONDO CARD*/
+  .card {
+    background-color: transparent;
+    max-width: 18em;
+  
+    margin-top: 1em;
+    padding: 1em;
+    
+  }
+  .image-container {
+    text-align: center;
+  }
+  img {
+    max-width: 100%;
+    object-fit: contain;
+    height: 15em;
+  }
+  .container {
+    padding-top: 1em;
+    color: #110f29;
+  }
+  .container h5 {
+    font-weight: 500;
+  }
+  .hide {
+    display: none;
+  }
+
+  .product-name{
+    display:none;
+  }
+  @media screen and (max-width: 720px) {
+    img {
+      max-width: 100%;
+      object-fit: contain;
+      height: 10em;
+    }
+
+    /*ALTURA CARDS*/
+    .card {
+      max-width: 10em;
+      margin-top: 1em;
+      height: 19em;
+    }
+    #products {
+      grid-template-columns: auto auto;
+      grid-column-gap: 1em;
+    }
+  }
+
+  /*VENTANA MODAL*/
+
+  .modal-window{
+    
+    
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    z-index: 997;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0008;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 500ms ease-in-out;
+    /*display: none;*/
+  }
+
+  .modal-window:target{
+    /*display: block;*/
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-container{
+    position: relative;
+    border: thick double #d00;
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 70%;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    overflow: hidden;
+    background-color: #fff;
+  }
+
+  .modal-close{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    line-height: 3rem;
+    color: #fff;
+    background-color: #d00;
+    transition: background-color 300ms linear , transform 300ms ease-in-out;
+  }
+
+  .modal-close:hover{
+    background-color: #a00;
+    transform: scale(1.2);
+  }
+
+        /*FIN SECCION WRAPPER O CARDS*/
+        
+
+/*BOTONES SECCION CATEGORIAS*/
+
+.button-value {
+    border: 2px solid #32968a;
+    padding: .4em 1.3em;
+    margin-top: .5em;
+    border-radius: 3em;
+    background-color: transparent;
+    color: #32968a;
+    cursor: pointer;
+    max-width: 18em;
+  }
+  .button-value:hover {
+    background-color: #32968a;
+    color: #ffffff;
+  }
+    .active {
+    background-color: #32968a;
+    color: #ffffff;
+  }
+
+  /*
+  .button-value:checked ~ .tab-bg-hover{
+    transform: translateX(100%);
+  }
+  */
+/*FIN BOTONES*/
+
+
+/*Styles for product card*/
+
+
+/*Styles for product card*/
+
+.product .product-card{
+  z-index: 1;
+  background: #1D212B;
+  position: relative;
+  width: 300px;
+  height: 400px;
+  margin: 40px;
+  border-radius: 10px;
+}
+
+
+/*
+.product .product-card:before{
+  content: '';
+  background: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+*/
+/*AJUSTAR ANCHO DE IMAGEN*/
+.product .product-card .product-img{
+   width: 250px;
+  height: 220px;
+  object-fit: cover;
+  
+  
+
+  margin: 18px;
+  border-radius: 10px;
+  position: relative;
+  right: -5px;
+  
+  
+
+}
+
+.product .product-card .name{
+  z-index: 2;
+  color: #fff;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 130px;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.product .product-card .price{
+  z-index: 2;
+  color: #fff;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 80px;
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.product .product-card .popup-btn{
+  z-index: 2;
+  color: #fff;
+  background: #555;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 3px;
+  padding: 10px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/*Styles for popup view*/
+
+.product .popup-view{
+  z-index: 2;
+  background: #0008;;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s;
+}
+
+.product .popup-view.active{
+  opacity: 1;
+  visibility: visible;
+}
+
+.product .popup-card{
+  position: relative;
+  display: flex;
+  width: 800px;
+  height: 500px;
+  margin: 20px;
+}
+
+.product .popup-card .product-img{
+  z-index: 2;
+  background: #1D212B;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45%;
+  height: 90%;
+  transform: translateY(25px);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.product .popup-card .product-img img{
+  z-index: 2;
+  position: relative;
+  width: 450px;
+  left: -50px;
+}
+
+.product .popup-card .info{
+  z-index: 2;
+  background: #fff;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 40px;
+  border-radius: 10px;
+}
+/*CLOSED BOTON MODADL*/
+.product .popup-card .close-btn{
+  color: #fff;
+  z-index: 3;
+  position: absolute;
+  right: 0;
+  font-size: 20px;
+  margin: 20px;
+  cursor: pointer;
+  top: 0rem;
+   
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1.9rem;
+    
+    background-color: rgba(116, 116, 116, 0.479);
+    transition: background-color 300ms linear , transform 300ms ease-in-out;
+}
+
+.product .popup-card .close-btn:hover{
+    background-color: black;
+    transform: scale(1.3);
+  }
+
+.product .popup-card .info h2{
+  font-size: 40px;
+  line-height: 20px;
+  margin: 10px;
+}
+
+.product .popup-card .info h2 span{
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.product .popup-card .info p{
+  font-size: 15px;
+  margin: 10px;
+}
+
+.product .popup-card .info .price{
+  font-size: 45px;
+  font-weight: 300;
+  margin: 10px;
+}
+
+.product .popup-card .info .add-cart-btn{
+  color: #fff;
+  background: #009DD2;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin: 10px auto;
+  padding: 10px 50px;
+  border-radius: 20px;
+}
+
+.product .popup-card .info .add-wish{
+  color: #009DD2;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/*Responsive styles*/
+
+@media (max-width: 900px){
+  .product .popup-card{
+    flex-direction: column;
+    width: 550px;
+    height: auto;
+  }
+
+  .product .popup-card .product-img{
+    z-index: 3;
+    width: 100%;
+    height: 200px;
+    transform: translateY(0);
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .product .popup-card .product-img img{
+    left: initial;
+    max-width: 100%;
+  }
+
+  .product .popup-card .info{
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .product .popup-card .info h2{
+    margin: 20px 5px 5px 5px;
+    font-size: 25px;
+  }
+
+  .product .popup-card .info h2 span{
+    font-size: 10px;
+  }
+
+  .product .popup-card .info p{
+    margin: 5px;
+    font-size: 13px;
+  }
+
+  .product .popup-card .info .price{
+    margin: 5px;
+    font-size: 30px;
+  }
+
+  .product .popup-card .info .add-cart-btn{
+    margin: 5px auto;
+    padding: 5px 40px;
+    font-size: 14px;
+  }
+
+  .product .popup-card .info .add-wish{
+    font-size: 14px;
+  }
+
+  .product .popup-card .close-btn{
+    z-index: 4;
+  }
+}
+   
+
+@media (max-width: 720px){
+
+.product .product-card{
+z-index: 1;
+background: transparent;
+position: relative;
+width: 230px;
+height: 300px;
+margin: 40px;
+border-radius: 10px;
+max-width: 10em;
+margin-top: 1em;
+right: 50px;
+border: 2px solid #32968a;
+}
+
+.product .product-card .product-img{
+ width: 100%;
+height: 200px;
+object-fit: cover;
+
+
+
+margin: 18px;
+border-radius: 10px;
+position: relative;
+right: 18px;
+
+
+
+}
+
+.product .popup-card{
+  flex-direction: column;
+  width: 550px;
+  height: auto;
+  max-width: 20em;
+  margin-top: 1em;
+  left: -19px;
+}
+
+.product .popup-card .product-img{
+  z-index: 3;
+  width: 100%;
+  height: 200px;
+  transform: translateY(0);
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/*INDECISO*/
+
+.product .popup-card .product-img img{
+  left: initial;
+  max-width: 100%;
+  /* width: 100%;
+height: 200px;
+object-fit: cover;
+*/
+  
+}
+
+.product .popup-card .info{
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.product .popup-card .info h2{
+  margin: 20px 5px 5px 5px;
+  font-size: 25px;
+}
+
+.product .popup-card .info h2 span{
+  font-size: 18px;
+}
+
+.product .popup-card .info p{
+  margin: 5px;
+  font-size: 13px;
+}
+
+.product .popup-card .info .price{
+  margin: 5px;
+  font-size: 30px;
+}
+
+.product .popup-card .info .add-cart-btn{
+  margin: 5px auto;
+  padding: 5px 40px;
+  font-size: 14px;
+}
+
+.product .popup-card .info .add-wish{
+  font-size: 14px;
+}
+
+.product .popup-card .close-btn{
+  z-index: 4;
+}
+}
+ 
+
+
+
+    </style>
+</head>
+<body>
+
+
+
+  <header>
+      <a href="#" class="logo">Bar El Quetzal</a>
+      <ul class="navigation">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="#">Cocteles</a></li>
+          <li><a href="favoritos.html">Mis Favoritos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+      <div class="search">
+          <input type="search" placeholder="Buscar">
+          <i class="fa fa-search" aria-hidden="true"></i>
+          
+
+      </div>
+  </header>
+    
+
+
+    <!-- blogs section starts  -->
+
+<section class="blogs" id="blogs">
+
+  <br><br><br><br><br>
+
+    <h1 class="heading"> <span>Categorias</span> </h1>
+
+</section>
+  <div class="wrapper">
+    <div id="search-container">
+      <input
+        type="search"
+        id="search-input"
+        placeholder="Buscar coctel.."
+      />
+      <button id="search">Buscar</button>
+    </div>
+
+    <div id="buttons">
+      <button class="button-value" onclick="filterProduct('all')">
+        Todo
+      </button>
+            
+      <button class="button-value" onclick="filterProduct('baileys')">
+        Baileys
+    </button>
+
+    <button class="button-value" onclick="filterProduct('brandy')">
+        Brandy
+    </button>
+
+    <button class="button-value" onclick="filterProduct('cafe')">
+        Cafe
+    </button>
+
+    <button class="button-value" onclick="filterProduct('cerveza')">
+        Cerveza
+    </button>
+
+    <button class="button-value" onclick="filterProduct('gin')">
+        Gin
+    </button>
+
+    <button class="button-value" onclick="filterProduct('jagger')">
+        Jagger
+    </button>
+
+    <button class="button-value" onclick="filterProduct('kahlua')">
+        Kahlua
+    </button>
+
+    <button class="button-value" onclick="filterProduct('quezalteca')">
+        Quezalteca
+    </button>
+
+    <button class="button-value" onclick="filterProduct('tequila')">
+        Tequila
+    </button>
+
+    <button class="button-value" onclick="filterProduct('ron')">
+        Ron
+    </button>
+
+    <button class="button-value" onclick="filterProduct('vino')">
+        Vino
+    </button>
+
+    <button class="button-value" onclick="filterProduct('vodka')">
+        Vodka
+    </button>
+
+    <button class="button-value" onclick="filterProduct('whisky')">
+        Whisky
+    </button>
+
+    </div>
+    
+
+  </div>
+   
+
+    
+  </div>    
+<article id="products">
+</article>
+<!--
+
+  <div class="card">
+      <div class="image-container">
+        <img>
+      </div>
+
+    <div class="container">
+  
+      <a href="#modal-1" class="modal-link">Ver descripcion</a>
+      <article id="modal-1" class="modal-window">
+        <div class="modal-container">
+            <a href="#cerrar" class="modal-close">X</a>
+            <h2>titulo de la ventana modal</h2>
+            <h2></h2>
+            <p>parrafo de la ventana modal</p>
+            <ul>
+                <li>lista 1</li>
+                <li>lista 2</li>
+                <li>lista 3</li>
+            </ul>
+        </div>
+      </article>
+  
+   
+    
+    </div>
+</div>
+
+
+-->
+
+<!-- blogs section ends -->
+
+<div class="swiper blogs-slider">
+
+
+  <button class="button-value" onclick="filterProduct('all')">
+  Todo
+  </button>
+
+<div class="swiper-wrapper" >
+
+
+
+
+
+
+            <div class="swiper-slide box">
+                <button class="button-value" onclick="filterProduct('baileys')">
+                    Baileys
+                </button>
+            </div>
+          
+          <div class="swiper-slide box">
+                <button class="button-value" onclick="filterProduct('brandy')">
+                    Brandy
+                </button>
+          </div>
+          
+          <div class="swiper-slide box">
+                <button class="button-value" onclick="filterProduct('cafe')">
+                    Cafe
+                </button>
+          </div>
+          
+          <div class="swiper-slide box">
+                <button class="button-value" onclick="filterProduct('cerveza')">
+                    Cerveza
+                </button>
+          </div>
+
+          <div class="swiper-slide box">
+                <button class="button-value" onclick="filterProduct('gin')">
+                    Gin
+                </button>
+          </div>
+          
+          <div class="swiper-slide box">
+                <button class="button-value" onclick="filterProduct('jagger')">
+                    Jagger
+                </button>
+          </div>
+        
+          <div class="swiper-slide box">
+                <button class="button-value" onclick="filterProduct('kahlua')">
+                    Kahlua
+                </button>
+          </div>
+          
+          <div class="swiper-slide box">
+                <button class="button-value" onclick="filterProduct('quezalteca')">
+                    Quezalteca
+                </button>
+          </div>
+          
+          <div class="swiper-slide box">
+                <button class="button-value" onclick="filterProduct('tequila')">
+                    Tequila
+                </button>
+          </div>
+        
+          <div class="swiper-slide box">
+                <button class="button-value" onclick="filterProduct('ron')">
+                    Ron
+                </button>
+          </div>
+          
+          <div class="swiper-slide box">
+                <button class="button-value" onclick="filterProduct('vino')">
+                    Vino
+                </button>
+          </div>
+        
+          <div class="swiper-slide box">
+                <button class="button-value" onclick="filterProduct('vodka')">
+                    Vodka
+                </button>
+          </div>
+        
+          <div class="swiper-slide box">
+                <button class="button-value" onclick="filterProduct('whisky')">
+                    Whisky
+                </button>
+          </div>
+ 
+
+</div>
+
+
+
+
+
+</div>
+
+
+<footer class="footer">
+  <div class="container__footer">
+      <div class="row">
+          <div class="footer-col">
+              <h4>Bar el quetzal</h4>
+              <ul>
+                  <li><a href="#">Acerca de</a></li>
+                  <li><a href="#">Nuestro servicios</a></li>
+                  <li><a href="#">privacy policy</a></li>
+                  <li><a href="#">Servicios</a></li>
+              </ul>
+          </div>
+          <div class="footer-col">
+              <h4>Nosotros</h4>
+              <ul>
+                  <li><a href="#">Bebidas</a></li>
+                  <li><a href="#">A domicilio</a></li>
+                  <li><a href="#">Eventos</a></li>
+                  <li><a href="#">Cotizaciones</a></li>
+                  <li><a href="#">Lugar</a></li>
+              </ul>
+          </div>
+          <div class="footer-col">
+              <h4>Informacion</h4>
+              <ul>
+                  <li><a href="#">Contacto</a></li>
+                  <li><a href="#">Numero: +502 00000000</a></li>
+                  <li><a href="#">Quetzaltengo, Guatemala</a></li>
+                  <li><a href="#">correo</a></li>
+              </ul>
+          </div>
+          <div class="footer-col">
+              <h4>Siguenos</h4>
+              <div class="social-links">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                  <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                  <br><br><br><br>
+                  <h5 style="color: #fff; text-align: center;">© 2022 Bar El Quetzal, Guatemala.  <br>Diseño y desarrollo luisfernandolocu@gmail.com <br></h5>
+                  <h6 style="color: #fff; text-align: center;">
+                      <a href="mailto:luisfernandolocu@gmail.com?subject=Necesito&nbsp;informacion&body=Me&nbsp;gustaria&nbsp;tener&nbsp;mas&nbsp;informacion">
+                          <button style="background: transparent; color: #fff; border-style:none;"><p>luisfernandolocu@gmail.com</p></button>
+                        </a>
+                  </h6>
+                  
+              </div>
+          </div>
+          
+      </div>
+  </div>
+</footer>
+
+
+
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<script>
+    var swiper = new Swiper(".blogs-slider", {
+  spaceBetween: 12,
+  grabCursor:true,
+  loop:true,
+  centeredSlides: true,
+  autoplay: {
+    delay: 3500,
+    disableOnInteraction: false,
+  },
+  breakpoints: {
+    0: {
+      slidesPerView: 3,
+    },
+    768: {
+      slidesPerView: 7,
+    },
+    1024: {
+      slidesPerView: 10,
+    },
+  },
+});
+
+let products = {
+  data: [
+  {
+      productName: "coco bailey´s",
+      category: "baileys",
+      price: "",
+      image: "1IH3JJgHyUKRVOZ4sSiVcLJfCUtnp3MM8",
+      descripcion: "<b>Ingredientes: </b><ul> <li>60 ml Baileys</li>30 ml vodka<li>60 ml crema de coco</li> <li>hielo</li></ul> <p><b>Procedimiento: </b> <br>Agregar el hielo e ingredientas a la licuadora , licuar de 10-20 segundos</p>"
+    },
+    {
+      productName: "helado de baileys",
+      category: "baileys",
+      price: "",
+      image: "1HUbtvW0UFJHL79SLghhO_PF_aAg1aGjb",
+      descripcion: "<b>Ingredientes: </b><ul><li>100 ml Baileys</li> <li>100 ml de helado de crema o vainilla</li> <li>Hielo</li> <li>Galletas de chocolate</li></ul> <p><b>Procedimiento: </b> <p><ul> <li>Añadir el Baileys , el helado y el hielo en la licuadora </li><li>Licuar hasta obtener una consistencia espesa </li>Servir en una copa <li></li><li>Decorar con galleta espolvoreada</li></ul></p>"
+    },
+    {
+      productName: "jagger cloud",
+      category: "baileys",
+      price: "",
+      image: "1ZXehVTgAbSHHbqOUaP_ciTi5NB8UKgbw",
+      descripcion: "<b>Ingredientes: </b><ul><li> 1 onzas de Jaggermeister</li><li>1 onza de kalua</li><li>3 onzas de baileys</li><li>Hielo</li></ul> <p><b>Procedimiento: </b><br>Agregar hielo  <br>Colocar ingredientes segun orden de la receta, mezclar</p>"
+    },
+    {
+      productName: "brandy alexander",
+      category: "brandy",
+      price: "",
+      image: "11V8Mnau8Ww-TdH9N-klOKyu9BPpE8krc",
+      descripcion: "<b>Ingredientes: </b><ul><li>1 1/2 oz Brandy</li> <li>1/2 licor de chocolate blanco</li> <li>1/2 oz licor de chocolate marron </li> <li>3/4 oz crema de leche </li><li>Hielo</li> <li>1/2 oz clara de huevo(opcional)</li> </ul> <p><b>Procedimiento: </b> <br>En una coctelera agregar hielo y los ingredientes<br>Batir energeticamente durante 20 segundos, colar <br> Servir en copa fria <br>Decorar con nuez moscada</p>"
+    },
+    {
+      productName: "brandy cobbler",
+      category: "brandy",
+      price: "",
+      image: "1-cORYgcD4VYr7gD3GD0fp79WVYC_8Dvr",
+      descripcion: "<b>Ingredientes: </b><ul><li>60 ml brandy</li> <li>15 ml jarabe de azucar</li> <li>7.5 ml jugo fresco de limon </li> <li>7.5 ml licor de marraschino (cereza) </li><li>7.5 ml curacao rojo/granadina  </li> <li>Hielo trozado</li><li>Fruta picada de temporada</li> </ul> <p><b>Procedimiento: </b> <br>Servir en una copa o vaso con hielo troceado<br>Decorar con fruta de la estacion picada</p>"
+   
+    },
+    {
+      productName: "brandy daisy",
+      category: "brandy",
+      price: "",
+      image: "1AZd7rADUzKd80WFiw92FoW7XAjzMdVRr",
+      descripcion: "<b>Ingredientes: </b><ul><li>15 ml brandy</li> <li>7.5 ml jugo fresco de limon</li> <li>15 ml jugo de naranja</li> <li>7.5 ml jarabe de granadina (dash)</li><li>5 cubos de hielo</li> <li>Soda para completar</li><li>Fruta picada de la temporada</li></ul> <p><b>Procedimiento: </b> <br>Colocar hielo en la copa<br>Colocar los ingredientes en orden segun la receta <br>Completar con soda <br>Decorar con fruta picada de la temporada<br>Servir en copa alta</p>"
+   
+    },
+    {
+      productName: "american rosen",
+      category: "brandy",
+      price: "",
+      image: "11PcPbKUqtUr0FZF_SlIP6CQnJzQjC345",
+      descripcion: "<b>Ingredientes: </b><ul><li>45 ml brandy</li> <li>60 ml nectar de durazno</li> <li>1 dash de granadina</li> <li>1 dash de pernod/licor de anis</li><li>5 cubos de hielo</li> <li>Champagne o vino espumante</li></ul> <p><b>Procedimiento: </b> <br>Colocar hielo en la copa<br>Colocar los ingredientes en la coctelera menos el champagne<br>Servir en una copa con hielo<br>Completar con champagne frio<br>Decorar con una brocheta de durazno <br>Servir en copa de champagne</p>"
+    },
+    {
+      productName: "brandy julep",
+      category: "brandy",
+      price: "",
+      image: "1tVyUIEIb-rzdVw3APlY4nHDJz-PWJLYM",
+      descripcion: "<b>Ingredientes: </b><ul><li>60 ml brandy</li> <li>7.5 ml jugo fresco de limon</li> <li>5 gr azucar</li> <li>10 hojas de menta</li><li>4 cubos de hielo</li> <li>Soda</li></ul> <p><b>Procedimiento: </b> <br>Colocar dentro del vaso de highball el azucar y las hojas de menta macerar<br>Colocar cubos de hielo y luego los demas ingredientes<br>Completar con soda o agua natural<br>Decorar con hojas de menta</p>"
+    },
+    {
+      productName: "expresso",
+      category: "cafe",
+      price: "",
+      image: "1rDjEYP1TbPanzfgInATwhJcYNvQBAQdw",
+      descripcion: "<b>Ingredientes: </b><ul><li>18 gr cafe</li> <li>30 ml agua</li></ul> <p><b>Procedimiento: </b> <br>Extraccion de 15 a 20 segundos<br>Servir en taza o shot de 30 ml</p>"
+   
+    },
+    {
+      productName: "cafe affogatto",
+      category: "cafe",
+      price: "",
+      image: "1pLegqWQk9-097MB-yUI95G8y1p0l_89o",
+      descripcion: "<b>Ingredientes: </b><ul><li>30 mililitros de licor de cafe</li> <li>60 mililitros de cafe expreso</li> <li>2 bolas de helado de vainilla</li></ul> <p><b>Procedimiento: </b> <br>Agregar ingredientes a la licuadora <br>Licuar en velocidad alta por 10 segundos<br>Verter el contenido en un vaso corto</p>"
+   
+    },
+    {
+      productName: "frapuccino",
+      category: "cafe",
+      price: "",
+      image: "1tS9TIv09smoS0rxqdaVaseZqqoH1AkTf",
+      descripcion: "<b>Ingredientes: </b><ul><li>60 mililitros de expreso</li> <li>60 mililitros de leche condensada</li> <li>60 mililitros de leche</li> <li>30 mililitros de salsa de chocolate</li><li>1 cucharada de escencia de almendra/vainilla</li><li>Hielo</li><li>Crema batida</li></ul> <p><b>Procedimiento: </b> <br>Colocar en la licuadora el cafe expreso<br>Agregar los demas ingredientes a la licuadora<br>Agregar 5 a 6 cubos de hielo <br>Licuar durante 30 segundos<br>Servir en una copa <br>Decorar con cereza y crema batida</p>"
+   
+    },
+    {
+      productName: "margacheve blue",
+      category: "cerveza",
+      price: "",
+      image: "13ACBxM61xmAwE-h-aCOfq4f-d8GwOfSh",
+      descripcion: "<b>Ingredientes: </b><ul><li>1 oz (30 ml) Curacao azul</li><li>2 oz (60 ml) Tequila Blanco</li> <li>1 oz (30 ml)jugo de limon</li> <li>1 oz (30 ml)jarabe de azucar</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>Colocar en la licuadora hielo ,el tequila y curacao azul<br>Servir en copa previamente escarchada<br>Agregar la cerveza, dejarla reposada en la copa</p>"
+   
+    },
+    {
+      productName: "diablo de cerveza",
+      category: "cerveza",
+      price: "",
+      image: "1NdFHxum3as9C3RYXMRXD0vND_ePLoD2p",
+      descripcion: "<b>Ingredientes: </b><ul><li>Cerveza </li><li>3/4 oz(22 ml) jugo de limon</li> <li>2 hojas de hierbabuena</li><li>1 rodaja de pepino</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>En un baso high ball colocar hielo<br>agregar el jugo de limon y la rojada de pepino<br>Mezclar los ingredientes con cucharilla mezcladora<br>Colar ingredientes y servir en vaso<br>Agregar cerveza fria</p>"
+   
+    },
+    {
+      productName: "michelada",
+      category: "cerveza",
+      price: "",
+      image: "1KpqExjmUu4npF2ve7yngoDVen2leOdvk",
+      descripcion: "<b>Ingredientes: </b><ul><li>120 ml jugo de tomate </li><li>60 ml jugo de limon</li> <li>1 cerveza clara</li><li>Gotas de jugo magi</li><li>Gotas de salsa inglesa</li><li>Gotas de tabasco</li><li>7.5 ml de Salsa de ostras(alternativa salsa dulce)</li><li>Pimienta negra</li><li>Sal negra</li><li>Tajin</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>Mezclar los ingredientes excepto la cerveza en la coctelera<br>Colocar en un vaso o tarro cervecero con su garnitura y Tajin o sal negra<br>Verter hielo y el contenido de la coctelera<br>Terminar de llenar con la cerveza clara</p>"
+   
+    },
+     {
+      productName: "michelada malcriada",
+      category: "cerveza",
+      price: "",
+      image: "1_Tv1UNrB2WQMdZU5gZjnE8XdGcmWpW7b",
+      descripcion: "<b>Ingredientes: </b><ul><li>Cerveza</li><li>1 octavo de quezalteca tamarindo</li> <li>2 limones</li><li>Gotas de salsa inglesa</li><li>Chamoy</li><li>Pepino</li><li>Sal al gusto</li><li>Tajin</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>En copa onda o tarro cervecero hacer garnitura con chamoy, Tajin o sal<br>Dentro de la copa agregar chamoy al gusto<br>Agregar gotas de salsa inglesa<br>Agregar el jugo de los limones<br>Agregar la sal y tajin<br>Agregar hielo<br>Mezclar con cucharrilla mezcladora <br>Agregar 1/2 cerveza<br>Agregar mitad del octavo de tamarindo , la otra mitad colarla boca abajo de la copa </p>"
+   
+    },
+    {
+      productName: "shandy/panache",
+      category: "cerveza",
+      price: "",
+      image: "1cthjr-DxQapcVT13TCIluXXQolm90nBe",
+      descripcion: "<b>Ingredientes: </b><ul><li> 100 ml cerveza rubia fria</li><li>100 ml limonada gasificada fresca</li></ul> <p><b>Procedimiento: </b> <br>Escarchar copa con sal <br>Verter en una copa Pilsen o en un vaso mediano la limonada gasificada<br>Añadir la cerveza rubia<br>Servir</p>"
+   
+    },
+    {
+      productName: "liquid pie",
+      category: "cerveza",
+      price: "",
+      image: "1Wy_rhTs0QwKxcHLNnNk8kFvKgy_UGQbl",
+      descripcion: "<b>Ingredientes: </b><ul><li>60 ml moras</li><li>60 ml arandanos</li><li>15 ml jugo de limon</li><li>15 ml jarabe de azucar</li><li>Cerveza rubia</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>Procesar las moras y arandanos y obtener un jugo <br>Verter en un vaso o copa alta el jugo anterior, el jugo de limon y jarabe de azucar<br>Mezclar y agregar hielo<br>Completar con cerveza rubia</p>"
+    },
+    {
+      productName: "coctel de cerveza clara",
+      category: "cerveza",
+      price: "",
+      image: "1qatHIFDbMNngZZId3BrtkvzySVdizmS8",
+      descripcion: "<b>Ingredientes: </b><ul><li>30 ml jugo de limon</li><li>90 ml jugo de naranja</li><li>15 ml triple sec</li><li>15 ml onza de tequila</li><li>Cerveza clara</li><li>Jarabe de azucar</li></ul> <p><b>Procedimiento: </b> <br>Colocar hielo en un vaso alto<br>Agregar los ingredientes segun el orden de la receta<br>Mezclar bien agregar jarabe de azucar si fuera necesario<br>Agregar la cerveza para completar</p>"
+    },
+    {
+      productName: "coco volcano",
+      category: "gin",
+      price: "",
+      image: "19l5ZzOIIIcrEePPBBlQm8VOt2bD08W7W",
+      descripcion: "<b>Ingredientes: </b><ul><li>30 ml Gin Hendrick's</li><li>30 ml cointreau</li> <li>30 ml pure de coco Monin</li><li>10 ml jarabe de azucar</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>Verter todos los ingredientes en una licuadora con hielo <br>Licuar hasta obtener una preparacion homogenea<br>Servir en un vaso Old Fashioned o dentro de la mitad de un coco</p>"
+   
+    },
+    {
+      productName: "medias de seda",
+      category: "gin",
+      price: "",
+      image: "10yNAH4wFZwkmsTgpjaQe0m4xoolZ-i-Y",
+      descripcion: "<b>Ingredientes: </b><ul><li>30 ml de ginebra</li><li>20 ml licor de cacao</li> <li>15 ml de granadina</li><li>75 ml leche evaporada</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>Colocar en la coctelera los ingredientes<br>Servir en una copa Martini con hielo <br>Decorar con fresa</p>"
+   
+    },
+    {
+      productName: "",
+      category: "jagger",
+      price: "",
+      image: "",
+    },
+    {
+      productName: "coffe cream",
+      category: "kahlua",
+      price: "",
+      image: "1wXxxiuAd4Y__xUbZTAKgnAo3Wp9u_BjB",
+      descripcion: "<b>Ingredientes: </b><ul><li> 1 onzas (30 ml) de tequila</li><li>1 onza (30 ml) kalua</li><li>6 onzas de leche</li><li>Hielo</li></ul> <p><b>Procedimiento: </b><br>Agregar hielo  <br>Colocar ingredientes segun orden de la receta, mezclar</p>"
+    },
+    {
+      productName: "beso de angel",
+      category: "kahlua",
+      price: "",
+      image: "1Xonvpz7CLgQ5XW3BRf3gh2KhmhzXDxG4",
+      descripcion: "<b>Ingredientes: </b><ul><li>50 ml de kahlua</li><li>90 ml leche de almedras/crema de leche</li><li>10 ml de jarabe de azucar</li></ul> <p><b>Procedimiento: </b> <br>Colocar en copa el kalua y el jarabe y mezclar<br>con cucharilla mezcladora agregar <br>Decorar con cereza y canela</p>"
+   
+    },
+    {
+      productName: "lemon coffe",
+      category: "kahlua",
+      price: "",
+      image: "1Cej1YcBSmJIyZbJJLUfi5My7t_ppCUhX",
+      descripcion: "<b>Ingredientes: </b><ul><li> 2 onzas (60 ml) de kahlua</li><li>1 onza (30 ml) vodka</li><li>50 ml jugo de limon</li><li>Agua Mineral</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>Colocar en vaso Old Fashion el jugo de limon, kalua y vodka, mezclar<br>Agregar hielo <br>complemetar con agua mineral</p>"
+    },
+    {
+      productName: "piña blitz",
+      category: "quezalteca",
+      price: "",
+      image: "1LAfgT1ObIVgNRYbgSjmT6It1h0yEdF11",
+      descripcion: "<b>Ingredientes: </b><ul><li> 4 trozos pequeños de piña</li><li>5 hojas de hierba buena</li><li>60 ml jugo de limon</li><li>Azucar</li></li><li>Azucar</li><li>1 octavo de quezalteca piña/limon</li><li>1 1/2 de tequila</li><li>Ginger ale</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>decorar copa con tajin , trozo de piña y rodaja de limon<br>Colocar en vaso highball la piña, el jugo de limon,azucar, hojas de hierba buena y tequila mezclar<br>Agregar el octavo de sabor <br>Agregar hielo <br>complemetar con ginger ale</p>"
+    
+    },
+    {
+      productName: "peltrito quezalteca",
+      category: "quezalteca",
+      price: "",
+      image: "1Bh3cG2GRho_XbQ_vccN7PSk_kIqCDZ1O",
+      descripcion: "<b>Ingredientes: </b><ul><li>1 octavo quezalteca de naranja</li><li> 60 ml de jugo de limon</li><li>Tajin</li><li>Sal</li>Gaseosa de toronja</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>Decorar peltrito/copa con tajin y limon<br>Colocar hielo y demas ingredientes, excepto el octavo de quezalteca y la gaseosa<br>Agregar la mitad del octavo , la otra mitad dejarla resposar en la copa<br>Complemetar con gaseosa de toronja</p>"
+    },
+    {
+      productName: "revoltosa",
+      category: "quezalteca",
+      price: "",
+      image: "1eCIRO2ByZICkv4gaKStyqS0kKhCdwOXf",
+      descripcion: "<b>Ingredientes: </b><ul><li> 90 ml quezalteca tamarindo</li><li>90 ml vodka</li><li>7.5 ml triple sec</li><li>Un par de tamarindos</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>Agregar los ingredientes en la coctelera<br>Mezclar energeticamente durante 10 segundos<br>Verter en un vaso alto con hielo<br>Decorar con tamarindos y limon</p>"
+    
+    },
+    {
+      productName: "semuc champey",
+      category: "quezalteca",
+      price: "",
+      image: "1k5YzX-XgOBrhVun1NLgkOF6M0WxnBhs7",
+      descripcion: "<b>Ingredientes: </b><ul><li>30 ml vodka</li><li>90 ml quezalteca horchata</li><li>90 ml leche evaporada</li><li>7.5 ml curacao azul</li><li>7.5 ml triple sec</li><li>5 gr leche condensada o nutella</li></ul> <p><b>Procedimiento: </b> <br>Agregar los ingredientes en la coctelera y agitar vigorosamente<br>Verter en una copa martinera y decorar con menta</p>"
+    },
+    {
+      productName: "coco piña",
+      category: "quezalteca",
+      price: "",
+      image: "16euKhlY2fov375j0ftZ89C63Hs2zF6Fy",
+      descripcion: "<b>Ingredientes: </b><ul><li>45 ml quezalteca blanca</li><li>120 ml agua de coco natural</li><li>30 ml jugo de piña</li><li>15 ml jarabe de azucar</li><li>dash de granadina</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>Verter los ingredientes en una coctelera agregar hielo<br>Mezclar energeticamente durante 10 segundos <br> Verter en una copa martinera y terminar con un dash de granadina <br>Decorar con piña y coco</p>"
+    },
+    {
+      productName: "roja pasion",
+      category: "quezalteca",
+      price: "",
+      image: "12ut3MjDD7Ol-hgAVcLLyrr36NkaD229c",
+      descripcion: "<b>Ingredientes: </b><ul><li>90 ml quezalteca jamaica</li><li>30 ml tripe sec</li><li>30 ml vodka</li><li>30 ml gaseosa de lima</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>Agregar los ingredientes en la coctelera excepto la gaseosa<br>Mezclar energeticamente durante 10 segundos <br> Verter el contenido en un vaso corto y decorar con lima </p>"
+    },
+    {
+      productName: "pepito",
+      category: "quezalteca",
+      price: "",
+      image: "1jdkxR3PlvsjqHEj45WZI-uSE4w3ThT6Q",
+      descripcion: "<b>Ingredientes: </b><ul><li>45 ml quezalteca</li><li>5 gr sal</li><li>2.5 gr chile cobanero</li><li>60 ml jugo de limon</li><li>Hielo</li></ul> <p><b>Preparacion: </b> <br>Mezclar ingredientes en una coctelera con hielo <br> Verter en un vaso <br> Acompañar con pedazos de pepino envuelto en pepitoria</p>"
+    },
+    {
+      productName: "tequila sunrise",
+      category: "tequila",
+      price: "",
+      image: "1cXMJQR4AZI61xqWn7nZ1IVVbjPESVsen",
+      descripcion: "<b>Ingredientes: </b><ul><li>45 ml tequila</li><li> 150 ml de jugo de naranja</li><li>15 ml granadina</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>Colocar en un vaso collins o highball hielo<br>Agregar los ingredientes en el orden mencionado excepto la granadina<br>Servir en copa , añadir granadina lentamente para evitar que se mezcle <br> Decorar con naranja y cereza</p>"
+    },
+    {
+      productName: "paloma",
+      category: "tequila",
+      price: "",
+      image: "11hgQh6XUy6xkm-ntMrZQuyb5oE14RHsp",
+      descripcion: "<b>Ingredientes: </b><ul><li>45 ml tequila</li><li> 15 ml jugo de limon</li><li>135 ml refresco de toronja</li><li>Hielo</li></ul> <p><b>Procedimiento: </b> <br>Colocar en un vaso collins hielo previamente escarchado con sal<br>Agregar los ingredientes<br> Decorar y servir con mezclador</p>"
+    },
+    {
+      productName: "cucaracha",
+      category: "tequila",
+      price: "",
+      image: "1VEVFYy0peicKVjY4tlkJ_DhLDx7O4f8i",
+      descripcion: "<b>Ingredientes: </b><ul><li>15 ml licor de cafe</li><li> 30 ml tequila blanco</li><li>5 ml licor de naranja</li></ul> <p><b>Procedimiento: </b> <br>En un tequilero agregar los ingredientes en el orden mencionado<br>Prenderle fuego a la bebida<br>Servir con pajilla<br><mark>Tomar cuidadosamente!!</mark></p>"
+    },
+    {
+      productName: "mockingbird tequila",
+      category: "tequila",
+      price: "",
+      image: "1Pz8YLbq5Wz97wCjxtg1rwkWwQpxyLKt7",
+      descripcion: "<b>Ingredientes: </b><ul><li>65 ml tequila blanco</li><li> 30 ml licor de menta</li><li>30 ml jugo de limon</li><li>Hielo</li><li>Cerezas rojas para decorar</li><li>gotas de curacao</li></ul> <p><b>Preparacion: </b> <br>Agregar los ingredientes en la coctelera menos el curacao , agitar vigorosamente<br>Verter en shot agregar la cereza y por ultimo el curacao</p>"
+    },
+    {
+      productName: "petite fleur",
+      category: "ron",
+      price: "",
+      image: "1AdlvuJkiSIHPj8pxOE4J8cbvKt0dU31a",
+      descripcion: "<b>Ingredientes: </b><ul><li>30 ml ron blanco</li><li> 30 ml licor de menta</li><li>15 ml jugo de limon</li><li>Hielo</li><li>3 cubos de hielo</li></ul> <p><b>Preparacion: </b> <br>Colocar todos los ingredientes segun el orden de la receta en la coctelera<br>Colocar hielos en la copa para enfriar y luego retirar <br>Servir en copa <br>Decorar con toronja y cereza</p>"
+    },
+    {
+      productName: "planter´s punch",
+      category: "ron",
+      price: "",
+      image: "10UB9FQT0zAToXFscpOm06mD6PUSWyj-r",
+      descripcion: "<b>Ingredientes: </b><ul><li>60 ml ron blanco</li><li> 90 ml jugo de naranja</li><li>60 ml nectar de piña</li><li>15 ml jarabe de granadina</li><li>Cubos de hielo</li></ul> <p><b>Preparacion: </b> <br>Colocar hielo en un vaso largo<br>Verter los ingredientes segun el orden de la receta <br>Por ultimo , agregar la granadina <br>Decorar con naranja y cereza en el borde</p>"
+    
+    },
+    {
+      productName: "ron cooler",
+      category: "ron",
+      price: "",
+      image: "1tvAE2BxEFb8NekGz6fWcgAD1HtO9dEVy",
+      descripcion: "<b>Ingredientes: </b><ul><li>60 ml ron blanco</li><li>15 ml licor de durazno</li><li>15 ml de jugo de limon</li><li>15 ml de jarabe de azucar</li><li>120 ml de ginger ale</li></ul> <p><b>Preparacion: </b> <br>Colocar hielo en un vaso collins<br>Agregar los ingredientes <br>Mezclar con una cuchilla ligeramente <br>Decorar</p>"
+    
+    },
+    {
+      productName: "mojito",
+      category: "ron",
+      price: "",
+      image: "14h94VTtCRgDZ0hCzWFoIQaAUeYOiK_uB",
+      descripcion: "<b>Ingredientes: </b><ul><li>15 ml jugo de limon</li><li>60 ml ron blanco</li><li>15 gr azucar granulada</li><li>120 gr hielo troceado</li><li>Hojitas de menta/hierba buena</li><li>Mineral</li></ul> <p><b>Preparacion: </b> <br>Macerar las hojitas de menta con el azucar<br>Agregar hielo en el vaso <br>Agregar jugo de limon por ultimo el ron <br>Completar con soda <br>Decorar</p>"
+    
+    },
+    {
+      productName: "",
+      category: "vino",
+      price: "",
+      image: "",
+    },
+    {
+      productName: "",
+      category: "vino",
+      price: "",
+      image: "",
+    },
+    {
+      productName: "sex on the beach",
+      category: "vodka",
+      price: "",
+      image: "1eE13qBiYlO-0Lb2t_znvItInwuoNr4a8",
+      descripcion: "<b>Ingredientes: </b><ul><li>45 ml de Vodka</li><li>15 ml licor de melocoton</li><li>60 ml de jugo de naranja</li><li>60 ml de jugo de arandanos rojos</li><li>Hielo</li></ul> <p><b>Preparacion: </b> <br>En un vaso alto agregar hielo<br>Decorar con gajo de naranja y cereza</p>"
+    },
+    {
+      productName: "coco loco",
+      category: "vodka",
+      price: "",
+      image: "1fwYDpKuONMhG0XrLJs19qkb12Fhzkshn",
+      descripcion: "<b>Ingredientes: </b><ul><li>45 ml de vodka</li><li>45 ml de tequila</li><li>45 ml de ron blanco</li><li>55 ml crema de coco</li><li>110 ml zumo de limon</li><li>Hielo</li></ul> <p><b>Preparacion: </b> <br>Colocar los ingredientes en una coctelera segun el orden de la receta<br>Servir en una copa larga con hielo<br>Decorar</p>"
+   
+    },
+    {
+      productName: "bloddy mary",
+      category: "vodka",
+      price: "",
+      image: "1N2YdH2x_fOite4PgeJ-s0_Dc8Is20NkG",
+      descripcion: "<b>Ingredientes: </b><ul><li>7.5 ml salsa inglesa</li><li>15 ml jugo de limon</li><li>150 ml jugo de tomate</li><li>60 ml ron vodka</li><li>1 gr sal</li><li>Hielo</li></ul> <p><b>Preparacion: </b> <br>Colocar hielo en un vaso Highball<br>colocar los ingredientes segun el orden de la receta <br>Decorar con tallo de apio y revolvedor</p>"
+    },
+    {
+      productName: "vodka pasion",
+      category: "vodka",
+      price: "",
+      image: "1MKxONPaBsmuAVHtQlEsCUr1CKR2O1jOz",
+      descripcion: "<b>Ingredientes: </b><ul><li>45 ml vodka</li><li>15 ml jarabe de azucar</li><li>5 frambuesas</li><li>5 moras</li><li>Jugo de limon al gusto</li><li>Agua mineral</li><li>Hielo</li></ul> <p><b>Preparacion: </b> <br>Agregar todos los ingredientes en una coctelera sin el agua mineral<br>Mezclar y agregar el hielo , agitar<br>Servir en un vaso pequeño y agregar agua mineral</p>"
+    },
+    {
+      productName: "caipiroska veraniega",
+      category: "vodka",
+      price: "",
+      image: "1H7xkM8tz4Kw3yrxxuhptHcJMYjzC-kKQ",
+      descripcion: "<b>Ingredientes: </b><ul><li>50 ml de vodka</li><li>2 cdas azucar morena</li><li>Hojitas de menta</li><li>Una lima</li><li>Soda ginger ale</li><li>Hielo</li></ul> <p><b>Preparacion: </b> <br>Cortar la lima en trozos y agregar a un vaso highball<br>Macerar lima y azucar<br>Llenar el vaso con hielo picado <br>Verter el vodka , mezclar con cucharilla<br>Completar con soda</p>"
+    },
+    {
+      productName: "long island iced tea",
+      category: "vodka",
+      price: "",
+      image: "1eYBtcV15v426EqnbqNqd0UGkXgFdOOj1",
+      descripcion: "<b>Ingredientes: </b><ul><li>15 ml de vodka</li><li>15 ml ginebra</li><li>15 ml tequila</li><li>15 ml ron blanco</li><li>15 ml triple sec</li><li>Hielo</li><li>75 ml refresco de cola</li><li>Rodajas de limon</li></ul> <p><b>Preparacion: </b> <br>Colocar los ingredientes segun el orden de la receta menos el refresco de cola y la rodaja de limon<br>Mezclar energeticamente <br>Servir en vaso largo</p>"
+    },
+    {
+      productName: "copa de oro",
+      category: "vodka",
+      price: "",
+      image: "1UBVuyyKQP8A-LGhYDhWLL7xt1hhiJnzu",
+      descripcion: "<b>Ingredientes: </b><ul><li>Medio platano</li><li>1 dash de granadina</li><li>45 ml de vodka</li><li>15 ml triple sec</li><li>120 ml de zumo de naranja</li><li>15 ml de crema pura</li><li>15 ml de jarabe de azucar</li><li>Cubos de hielo</li><li>Ralladura de chocolate</li></ul> <p><b>Preparacion: </b> <br>Colocar en una licuadora los ingredientes menos la ralladura de chocolate<br>Licuar durante 20 segundos a potencia media<br>Verter en una copa alta decorar con chocolate rallado</p>"
+    },
+    {
+      productName: "combinado de naranja",
+      category: "vodka",
+      price: "",
+      image: "1eYBtcV15v426EqnbqNqd0UGkXgFdOOj1",
+      descripcion: "<b>Ingredientes: </b><ul><li>500 ml de jugo de naranja</li><li>60 ml de vodka</li><li>60 ml ginebra</li><li>3 cdas de azucar blanca</li><li>500 ml de champan</li><li>Rodajas de naranja</li><li>Cubos de hielo</li></ul> <p><b>Preparacion: </b> <br>En una jarra colocar el jugo de naranja, vodka, ginebra y el azucar<br>Mezclar energeticamente <br>Agregar el champan , rodajas de naranja <br>Llenar la jarra con hielo<br>Servir bien frio</p>"
+    },
+    {
+      productName: "cosmopolitan",
+      category: "vodka",
+      price: "",
+      image: "1eYBtcV15v426EqnbqNqd0UGkXgFdOOj1",
+      descripcion: "<b>Ingredientes: </b><ul><li>45 ml vodka</li><li>30 ml triple sec</li><li>30 ml jugo de arandanos</li><li>15 ml jugo de limon</li><li>Hielo</li><li>Decoara con limon y naranja</li></ul> <p><b>Preparacion: </b> <br>Colocar en la coctelera con hielo todos los ingredientes<br>Mezclar energeticamente <br>Servir en una copa martini</p>"
+    },
+    {
+      productName: "martini de chamoy",
+      category: "vodka",
+      price: "",
+      image: "1eYBtcV15v426EqnbqNqd0UGkXgFdOOj1",
+      descripcion: "<b>Ingredientes: </b><ul><li>20 ml chamoy</li><li>120 ml jugo de arandanos</li><li>30 ml triple sec</li><li>60 ml vodka</li><li>7 ml jarabe de azucar</li><li>Jugo de limon</li><li>Cubitos de hielo</li></ul> <p><b>Preparacion: </b> <br>Escarchar la copa con tajin y azucar<br>Colocamos en la coctelera todos los ingredientes en el orden de la receta<br>Agitamos energeticamente<br>Servimos en una copa martini</p>"
+    },
+    {
+      productName: "cielo azul",
+      category: "vodka",
+      price: "",
+      image: "1eYBtcV15v426EqnbqNqd0UGkXgFdOOj1",
+      descripcion: "<b>Ingredientes: </b><ul><li>60 ml vodka</li><li>30 ml triple sec</li><li>15 ml curacao azul</li><li>Hielo</li></ul> <p><b>Preparacion: </b> <br>Colocar los ingredientes en la coctelera <br>Agitar energeticamente<br>Servir en una copa para coctel</p>"
+    },
+    {
+      productName: "oh la la",
+      category: "vodka",
+      price: "",
+      image: "1eYBtcV15v426EqnbqNqd0UGkXgFdOOj1",
+      descripcion: "<b>Ingredientes: </b><ul><li>20 gr fresa</li><li>20 gr de mora</li><li>20 gr cerezas</li><li>40 ml vodka</li><li>15 ml licor de cereza</li><li>Angostura</li><li>1 dash de jarabe de azucar</li><li>Hielo</li></ul> <p><b>Preparacion: </b> <br>Extraer el jugo de frutas y el resto de los ingredientes<br>Agitar energeticamente<br>Servir en una copa margarita</p>"
+    },
+    {
+      productName: "pasion picante",
+      category: "vodka",
+      price: "",
+      image: "1eYBtcV15v426EqnbqNqd0UGkXgFdOOj1",
+      descripcion: "<b>Ingredientes: </b><ul><li>45 ml vodka</li><li>4 dash de salsa inglesa</li><li>2 dash de picante tipo tabasco</li><li>120 ml clamato</li><li>Jugo de limon</li><li>Sal y pimienta</li><li>Hielo</li></ul> <p><b>Preparacion: </b> <br>Escarchar la copa con sal y pimienta<br>En copa para coctel colocar hielo, vodka y el resto de los ingredientes<br>Completar con clamato</p>"
+    },
+    {
+      productName: "famous alejulep",
+      category: "whisky",
+      price: "",
+      image: "12c1xBWpFAnWF6NZEFj9Z5ku_YDxHDtKv",
+      descripcion: "<b>Ingredientes: </b><ul><li>10 hojas de menta</li><li>5 gr de azucar</li><li>10 ml de agua</li><li>40 ml de whisky</li><li>Hielo y ginger ale</li></ul> <p><b>Preparacion: </b> <br>En un vaso alto Highball colocar la menta y azucar<br>Macerar suavemente<br>Llenar el vaso con hielo y añadir el whisky <br>Cubrir con ginger ale <br> Mezclar suavemente con una cuchara de bar <br>Decorar con menta y servir bien frio</p>"
+   
+    },
+    {
+      productName: "old fashioned",
+      category: "whisky",
+      price: "",
+      image: "1-WasM7HyAyGaOPLeRuX86EMwTkwa-fm5",
+      descripcion: "<b>Ingredientes: </b><ul><li>5 gr de azucar</li><li>1 dash de gaseosa</li><li>2 dash de angostura bitter</li><li>40 ml de bourbon , scoth o whisky rye</li><li>Hielo</li></ul> <p><b>Preparacion: </b> <br>Colocar el azucar en un un vaso Old fashioned con la gaseosa y angostura bitter<br>Macerar hasta diluir el azucar<br>Llenar el vaso con hielo y agregar el bourbon, scotch o whisky rye<br>Cubrir con ginger ale <br>Decorar con media naranja o limon y cereza roja</p>"
+    },
+    {
+      productName: "explosion de burbujas",
+      category: "whisky",
+      price: "",
+      image: "1SXRdRmSPJs-ic71V3_br2Fsvth3Ht99y",
+      descripcion: "<b>Ingredientes: </b><ul><li>30 ml de whisky</li><li>30 ml de ginebra</li><li>30 ml de tequila</li><li>30 ml de ron</li><li>Refresco de lima</li><li>Hielo</li></ul> <p><b>Preparacion: </b> <br>Colocar todos los ingredientes en la coctelera<br>Agitar energeticamente durante 10 segundos<br>Servir en shot a la mitad y completar con el refresco de lima</p>"
+    },
+    {
+      productName: "shot de tequila",
+      category: "tequila",
+      price: "",
+      image: "1SXRdRmSPJs-ic71V3_br2Fsvth3Ht99y",
+      descripcion: "<b>Ingredientes: </b></ul> <p><b>Preparacion: </b> </p>"
+    },
+  ],
+  };
+
+  //let section = document.getElementById("section");
+  //$fragment = d.createDocumentFragment();
+
+    
+
+    /*
+    $products = document.getElementById("products"),
+      $template = document.getElementById("product-template").content,
+      $fragment = document.createDocumentFragment();
+      */
+
+      
+  
+  for (let i of products.data) {
+
+
+    //image.setAttribute("src",`https://drive.google.com/uc?export=download&id=${i.image}`);
+
+
+
+
+    //Create Card
+
+
+    let card = document.createElement("div");
+    //Card should have category and should stay hidden initially
+    card.classList.add("card", i.category, "hide"); 
+    //image div
+    card.innerHTML += `     
+                        
+
+
+                        <div class="container">
+              <div class="product">
+                <div class="product-card">
+                  <h2 class="name">${i.productName ? i.productName : "Sin nombre"}</h2>
+                  <span class="price"></span>
+                  <a class="popup-btn">Ver receta</a>
+                  <img src="https://drive.google.com/uc?export=download&id=${i.image}" class="product-img" alt="${i.productName}" style="">
+                </div>
+                <div class="popup-view">
+                  <div class="popup-card">
+                    <a><i class="fas fa-times close-btn"></i></a>
+                    <div class="product-img">
+                      <img src="https://drive.google.com/uc?export=download&id=${i.image}" alt="">
+                    </div>
+                    <div class="info">
+                      <h2><br><span>${i.productName}</span></h2>
+                      <p>${i.descripcion ? i.descripcion : "Sin descripcion"}</p>
+                      <span class="price"></span>
+                      <a href="#" class="add-cart-btn">Añadir a favoritos</a>
+                      <button  class="add-cart-btn" id="shareBtn">Compartir</button>
+                      <a href="#" class="add-wish"></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+            </div>
+                  
+              
+                        `;
+                        
+
+                        var popupViews = document.querySelectorAll('.popup-view');
+            var popupBtns = document.querySelectorAll('.popup-btn');
+            var closeBtns = document.querySelectorAll('.close-btn');
+
+/*
+            var shareBtn = document.querySelectorAll('#shareBtn');
+
+       // const title = window.document.title;
+      var url = window.document.location.href;
+
+      var compartir = function share(){
+
+// Check for Web Share api support
+if (navigator.share) {
+  // Browser supports native share api
+  navigator.share({
+    text: 'Echale un vistazo a este coctel: ',
+    //title:`${title}`,
+          url: `${url}`
+  }).then(() => {
+    console.log('Thanks for sharing!');
+  })
+    .catch((err) => console.error(err));
+} else {
+  // Fallback
+  alert("Tu navegador no soporta esta funcion. Porfavor , Comparte este link manualmente :D")
+}
+
+}
+
+ shareBtn.forEach((shareBtn,i)=>{
+              shareBtn.addEventListener("click", ()=>{
+                compartir(i);
+              })
+            })
+        
+            */
+            //javascript for quick view button
+            var popup = function(popupClick){
+              popupViews[popupClick].classList.add('active');
+            }
+        
+
+            /*FUNCION compartir*/
+            popupBtns.forEach((popupBtn, i) => {
+              popupBtn.addEventListener("click", () => {
+                popup(i);
+              });
+
+              //shareBtn.addEventListener('click',compartir);
+              
+            });
+
+           
+
+            
+
+            
+        
+            //javascript for close button
+            closeBtns.forEach((closeBtn) => {
+              closeBtn.addEventListener("click", () => {
+                popupViews.forEach((popupView) => {
+                  popupView.classList.remove('active');
+                });
+              });
+            });
+
+            
+
+
+
+
+            /*WEB SHARE BOTON*/
+            
+            /*EDN WEB SHARE BOTON*/
+
+            let name = document.createElement("h5");
+    name.classList.add("product-name");
+    name.innerText = i.productName.toUpperCase();
+    card.appendChild(name);
+    
+                                
+    
+    document.getElementById("products").appendChild(card);
+
+    
+  }
+  
+  //parameter passed from button (Parameter same as category)
+  function filterProduct(value) {
+
+
+    
+    //Button class code
+    let buttons = document.querySelectorAll(".button-value");
+    buttons.forEach((button) => {
+      //check if value equals innerText
+      if (value.toUpperCase() == button.innerText.toUpperCase()) {
+        button.classList.add("active");
+      } else {
+        button.classList.remove("active");
+      }
+    })  ;
+
+   
+  
+    //select all cards
+    let elements = document.querySelectorAll(".card");
+    //loop through all cards
+    elements.forEach((element) => {
+      //display all cards on 'all' button click
+      if (value == "all") {
+        element.classList.remove("hide");
+      } else {
+        //Check if element contains category class
+        if (element.classList.contains(value)) {
+          //display element based on category
+          element.classList.remove("hide");
+        } else {
+          //hide other elements
+          element.classList.add("hide");
+        }
+      }
+    });
+
+    
+
+    
+    
+  }
+  
+  //Search button click
+  //seleccionar y presionar buscar 
+  document.getElementById("search").addEventListener("click", () => {
+  
+  
+    //al evento keypress(click al buscar)
+  //addEventListener("keypress", () => {
+
+
+    //initializations
+    let searchInput = document.getElementById("search-input").value;
+    let elements = document.querySelectorAll(".product-name");
+    let cards = document.querySelectorAll(".card");
+
+    //let productos = document.getElementById("products")
+
+    //section.innerHTML = `<img class="loader" src="oval.svg"  alt="Cargando...">`;
+
+
+    /*
+    if (elements.includes(searchInput) === 0) {
+            productos.innerHTML = `<h2>No existen resultados de shows para la busqueda : <mark>${query}</mark><h2>`
+          } else {
+          
+          }
+
+          */
+                      //loop through all elements
+    elements.forEach((element, index) => {
+      //check if text includes the search value
+      if (element.innerText.includes(searchInput.toUpperCase())) {
+        //display matching card
+        cards[index].classList.remove("hide");
+      } else {
+        //hide others
+        cards[index].classList.add("hide");
+      }
+    });
+            
+
+ 
+          
+   
+
+    //section.innerHTML = "";
+    
+  });
+  
+  //Initially display all products
+  window.onload = () => {
+    filterProduct("all");
+    
+  };
+</script>
+</body>
+</html>
